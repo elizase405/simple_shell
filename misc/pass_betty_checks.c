@@ -12,8 +12,14 @@
 
 int main(int argc, char **argv)
 {
-	int i = 0, n = 0, j;
-	char nl = '\n';
+	int n, i, j;
+	char nl;
+
+	nl = '\n';
+	i = 0;
+	n = 0;
+
+	(void) argc;
 
 	while (argv[i])
 	{
