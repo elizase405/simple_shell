@@ -13,5 +13,6 @@ char *_strcat(char *dest, char *src);
 int _strlen(char *);
 int _putchar(char c);
 void _print(char *c);
+char *_trim(char *s);
 
 #endif

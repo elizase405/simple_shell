@@ -30,7 +30,7 @@ int shell_prompt(char **argv, char **env)
 			return (0);
 		}
 	
-		_argv[0] = buf;
+		_argv[0] = _trim(buf);
 
 		for (i = 0; _argv[i]; i++)
 		{
@@ -63,7 +63,7 @@ int shell_prompt(char **argv, char **env)
 		else
 		{
 			wait(NULL);
-			free(buf);
+			free(buf), free(_argv[0]);
 		}
 	}
 	return (0);
