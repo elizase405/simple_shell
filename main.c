@@ -12,7 +12,6 @@
 int main(int argc, char **argv)
 {
 	int val;
-	extern char **environ;
 
 	if (argc == 1)
 		val = shell_prompt(argv, environ);

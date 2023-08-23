@@ -8,6 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+extern char **environ;
+
 int shell_prompt(char **argv, char **env);
 char *_strcat(char *dest, char *src);
 int _strlen(char *);
