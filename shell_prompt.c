@@ -27,7 +27,6 @@ int shell_prompt(char **argv, char **env)
 		if (getline(&buf, &n, stdin) == -1)
 		{
 			free(buf);
-			perror("getline failed");
 			return (-1);
 		}
 	
