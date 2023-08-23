@@ -12,7 +12,9 @@
 int main(int argc, char **argv, char **env)
 {
 	int val;
+	extern char **environ;
+	(void) env;
 	if (argc == 1)
-		val = shell_prompt(argv, env);
+		val = shell_prompt(argv, environ);
 	return (val);
 }
