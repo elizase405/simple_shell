@@ -9,11 +9,11 @@
  * Return: 0 if successful. -1 if failed
  */
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
 	int val;
 	extern char **environ;
-	(void) env;
+
 	if (argc == 1)
 		val = shell_prompt(argv, environ);
 	return (val);
