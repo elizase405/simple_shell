@@ -10,9 +10,7 @@
 
 int main(int argc, char **argv)
 {
-	int val;
-
 	if (argc == 1)
-		val = shell_prompt(argv, environ);
-	return (val);
+		shell_prompt(argv, environ);
+	return (0);
 }

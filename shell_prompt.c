@@ -54,7 +54,7 @@ int shell_prompt(char **argv, char **env)
 		{
 			if (execve(_argv[0], _argv, env) == -1)
 			{
-				free(buf);
+				free(buf), free(_argv[0]);
 				return (-1);
 			}
 		}
