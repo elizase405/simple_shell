@@ -19,6 +19,7 @@ int shell_prompt(char **argv, char **env)
 		int i = 0, j;
 		pid_t cid;
 		size_t n = 0;
+		(void) argv;
 
 		buf = NULL;
 
@@ -53,12 +54,7 @@ int shell_prompt(char **argv, char **env)
 		{
 			if (execve(_argv[0], _argv, env) == -1)
 			{
-				char *contd;
 				free(buf);
-				contd = ": No such file or directory\n";
-				_print(argv[0]);
-				_print(contd);
-				free(_argv[0]);
 				return (-1);
 			}
 		}

@@ -12,10 +12,17 @@ int _putchar(char c)
 	return (write(1, &c, 1));
 }
 
+/**
+ * _print - uses helper function _putchar to print string
+ * @c: string to be printed
+ *
+ * Return: void
+ */
 void _print(char *c)
 {
 	int i = 0;
-	while(c[i])
+
+	while (c[i])
 	{
 		_putchar(c[i]);
 		i++;

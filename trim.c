@@ -1,20 +1,21 @@
 #include "main.h"
 /**
- * _trim: removes whitespace anywhere in string
+ * _trim - removes whitespace anywhere in string
  * @s: string to be trimmed
  *
  * Example:
- * 	int main(void)
- * 	{
- * 		char *ss = "     hello";
- * 		printf("%s\n", ss);
- * 		char *trimmed = _trim(ss);
- * 		printf("%s\n", trimmed);
+ *	int main(void)
+ *	{
+ *		char *ss = "     hello";
+ *		printf("%s\n", ss);
+ *		char *trimmed = _trim(ss);
+ *		printf("%s\n", trimmed);
  *
- * 		free(trimmed);
- * 		return (0);
- * 	}
+ *		free(trimmed);
+ *		return (0);
+ *	}
  * N.T: free returned char *
+ *
  * Return: char *. needs to be freed
 */
 
@@ -35,7 +36,7 @@ char *_trim(char *s)
 	i = 0;
 	n = 0;
 
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] != ' ')
 		{
