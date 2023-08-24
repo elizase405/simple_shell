@@ -28,14 +28,18 @@ int shell_prompt(char **argv, char **env)
 
 		if (getline(&buf, &n, stdin) == -1)
 		{
-			free(buf);
+			free(buf), free(_argv[0]), free(_argv[1]), free(argv);
 			return (0);
 		}
 	
-		_argv[0] = _trim(buf);
+		_argv[0] = buf;
 
 		for (i = 0; _argv[i]; i++)
 		{
+			if (_argv[i] == NULL)
+				printf("anull\n");
+			else
+				printf("not a null\n");
 			for (j = 0; _argv[i][j]; j++)
 				;
 		}
@@ -45,7 +49,7 @@ int shell_prompt(char **argv, char **env)
 
 		if (cid == -1)
 		{
-			free(buf), free(_argv[0]);
+			free(buf);
 			perror("cid failed");
 			return (-1);
 		}
@@ -54,14 +58,14 @@ int shell_prompt(char **argv, char **env)
 		{
 			if (execve(_argv[0], _argv, env) == -1)
 			{
-				free(buf), free(_argv[0]);
+				free(buf);
 				return (-1);
 			}
 		}
 		else
 		{
 			wait(NULL);
-			free(buf), free(_argv[0]);
+			free(buf);
 		}
 	}
 	return (0);

@@ -8,9 +8,8 @@
  * Return: 0 if successful. -1 if failed
  */
 
-int main(int argc, char **argv)
+int main()
 {
-	if (argc == 1)
-		shell_prompt(argv, environ);
+	shell_prompt();
 	return (0);
 }
