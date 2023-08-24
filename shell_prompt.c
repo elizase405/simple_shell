@@ -44,7 +44,7 @@ int shell_prompt(char **argv, char **env)
 
 		if (cid == -1)
 		{
-			free(buf);
+			free(buf), free(_argv[0]);
 			perror("cid failed");
 			return (-1);
 		}
@@ -58,6 +58,7 @@ int shell_prompt(char **argv, char **env)
 				contd = ": No such file or directory\n";
 				_print(argv[0]);
 				_print(contd);
+				free(_argv[0]);
 				return (-1);
 			}
 		}
