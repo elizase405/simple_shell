@@ -22,7 +22,8 @@ int shell_prompt(char **argv, char **env)
 
 		buf = NULL;
 
-		write(STDIN_FILENO, "$ ", 2);
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "$ ", 2);
 
 		if (getline(&buf, &n, stdin) == -1)
 		{
