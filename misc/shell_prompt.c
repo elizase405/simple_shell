@@ -19,14 +19,16 @@ int shell_prompt(char **argv, char **env)
 		int i = 0, j;
 		pid_t cid;
 		size_t n = 0;
+		(void) argv;
 
 		buf = NULL;
 
-		write(STDIN_FILENO, "$ ", 2);
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "$ ", 2);
 
 		if (getline(&buf, &n, stdin) == -1)
 		{
-			free(buf);
+			free(buf), free(_argv[0]), free(_argv[1]), free(argv);
 			return (0);
 		}
 	
@@ -34,6 +36,10 @@ int shell_prompt(char **argv, char **env)
 
 		for (i = 0; _argv[i]; i++)
 		{
+			if (_argv[i] == NULL)
+				printf("anull\n");
+			else
+				printf("not a null\n");
 			for (j = 0; _argv[i][j]; j++)
 				;
 		}
@@ -52,11 +58,7 @@ int shell_prompt(char **argv, char **env)
 		{
 			if (execve(_argv[0], _argv, env) == -1)
 			{
-				char *contd;
 				free(buf);
-				contd = ": No such file or directory\n";
-				_print(argv[0]);
-				_print(contd);
 				return (-1);
 			}
 		}
