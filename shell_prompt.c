@@ -15,8 +15,7 @@ int shell_prompt(char **argv, char **env)
 	while (1)
 	{
 		char *buf;
-		char *_argv[] = {NULL, NULL};
-		int i = 0, j;
+		char **_argv;
 		pid_t cid;
 		size_t n = 0;
 
@@ -30,15 +29,8 @@ int shell_prompt(char **argv, char **env)
 			return (0);
 		}
 	
-		_argv[0] = buf;
+		_argv = use_strtok(buf);
 
-		for (i = 0; _argv[i]; i++)
-		{
-			for (j = 0; _argv[i][j]; j++)
-				;
-		}
-
-		_argv[i - 1][j - 1] = '\0';
 		cid = fork();
 
 		if (cid == -1)
@@ -53,7 +45,7 @@ int shell_prompt(char **argv, char **env)
 			if (execve(_argv[0], _argv, env) == -1)
 			{
 				char *contd;
-				free(buf);
+				free(buf), free(_argv);
 				contd = ": No such file or directory\n";
 				_print(argv[0]);
 				_print(contd);
@@ -63,7 +55,7 @@ int shell_prompt(char **argv, char **env)
 		else
 		{
 			wait(NULL);
-			free(buf);
+			free(buf), free(_argv);
 		}
 	}
 	return (0);
