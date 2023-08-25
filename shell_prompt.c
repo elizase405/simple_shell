@@ -18,6 +18,7 @@ int shell_prompt(char **argv, char **env)
 		char **_argv;
 		pid_t cid;
 		size_t n = 0;
+		(void) argv;
 
 		buf = NULL;
 
