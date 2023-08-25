@@ -8,7 +8,7 @@ int use_cid(char **_argv)
 	if (cid == 0)
 	{
 		if (execve(_argv[0], _argv, environ) == -1)
-			exit(EXIT_FAILURE);
+			return (0);
 	}
 	else
 		wait(NULL);
