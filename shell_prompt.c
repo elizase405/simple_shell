@@ -44,11 +44,7 @@ int shell_prompt(char **argv, char **env)
 		{
 			if (execve(_argv[0], _argv, env) == -1)
 			{
-				char *contd;
 				free(buf), free(_argv);
-				contd = ": No such file or directory\n";
-				_print(argv[0]);
-				_print(contd);
 				return (-1);
 			}
 		}
