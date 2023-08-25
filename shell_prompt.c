@@ -45,10 +45,10 @@ int shell_prompt(char **argv, char **env)
 			full_cmd = use_path(_argv[0]);
 			if (execve(full_cmd, _argv, env) == -1)
 			{
-				_print(argv[0]);
-				_print(": 1: ");
-				_print(_argv[0]);
-				_print(": not found\n");
+				write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+				write(STDERR_FILENO, ": 1: ", 5);
+				write(STDERR_FILENO, _argv[0], _strlen(_argv[0]));
+				write(STDERR_FILENO, ": not found\n", 12);
 				free(buf), free(_argv), free(full_cmd);
 				return (-1);
 			}
