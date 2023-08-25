@@ -16,8 +16,16 @@ int shell_prompt(char **argv, char **env)
 	{
 		char *buf, *full_cmd;
 		char **_argv;
+		int i;
 		pid_t cid;
 		size_t n = 0;
+
+		char *all_builtins[] = {
+			"exit",
+			"cd",
+			"env",
+			"help"
+		};
 
 		buf = NULL;
 
@@ -42,6 +50,18 @@ int shell_prompt(char **argv, char **env)
 
 		if (cid == 0)
 		{
+			int (*func_to_exec_builtin[]) (char **) = {
+				&exit_builtin,
+				&cd_builtin,
+				&env_builtin,
+				&help_builtin
+			};
+			for (i = 0; i < total_builtins(); i++)
+			{
+				if (strcmp(_argv[0], all_builtins[i]) == 0)
+					return ((*func_to_exec_builtin[i])(_argv));
+			}
+
 			full_cmd = use_path(_argv[0]);
 			if (execve(full_cmd, _argv, env) == -1)
 			{
@@ -50,7 +70,7 @@ int shell_prompt(char **argv, char **env)
 				write(STDERR_FILENO, _argv[0], _strlen(_argv[0]));
 				write(STDERR_FILENO, ": not found\n", 12);
 				free(buf), free(_argv), free(full_cmd);
-				return (-1);
+				return (EXIT_FAILURE);
 			}
 		}
 		else
