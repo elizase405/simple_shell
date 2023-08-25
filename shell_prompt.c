@@ -14,7 +14,7 @@ int shell_prompt(char **argv, char **env)
 {
 	while (1)
 	{
-		char *buf;
+		char *buf, *full_cmd;
 		char **_argv;
 		pid_t cid;
 		size_t n = 0;
@@ -43,9 +43,10 @@ int shell_prompt(char **argv, char **env)
 
 		if (cid == 0)
 		{
-			if (execve(_argv[0], _argv, env) == -1)
+			full_cmd = use_path(_argv[0]);
+			if (execve(full_cmd, _argv, env) == -1)
 			{
-				free(buf), free(_argv);
+				free(buf), free(_argv), free(full_cmd);
 				return (-1);
 			}
 		}
