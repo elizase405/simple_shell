@@ -18,7 +18,8 @@ void shell_prompt()
 
 	while (exec)
 	{
-		write(STDIN_FILENO, "$ ", 2);
+		if (isatty(STDIN_FILENO))
+			write(STDIN_FILENO, "$ ", 2);
 		buf = use_getline();
 		_argv = use_strtok(buf);
 		exec = use_execve(_argv);
