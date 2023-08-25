@@ -18,7 +18,6 @@ int shell_prompt(char **argv, char **env)
 		char **_argv;
 		pid_t cid;
 		size_t n = 0;
-		(void) argv;
 
 		buf = NULL;
 
@@ -46,6 +45,10 @@ int shell_prompt(char **argv, char **env)
 			full_cmd = use_path(_argv[0]);
 			if (execve(full_cmd, _argv, env) == -1)
 			{
+				_print(argv[0]);
+				_print(": 1: ");
+				_print(_argv[0]);
+				_print(": not found\n");
 				free(buf), free(_argv), free(full_cmd);
 				return (-1);
 			}
